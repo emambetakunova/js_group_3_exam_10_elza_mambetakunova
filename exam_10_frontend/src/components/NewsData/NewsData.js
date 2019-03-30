@@ -10,13 +10,11 @@ import AddComment from "../../containers/AddComment/AddComment"
 class NewsData extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
-        console.log(id);
         this.props.onFetchComments(id);
     }
 
     render() {
         let oneNews = this.props.oneNews;
-        console.log(oneNews);
         if (this.props.oneNews) {
             return <Card key={oneNews.id} style={{marginBottom: '10px'}}>
                 <CardBody>

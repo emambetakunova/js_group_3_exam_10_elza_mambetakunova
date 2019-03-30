@@ -66,7 +66,6 @@ export const createNews = data => {
 };
 
 export const openOneNews = id => {
-    console.log(id);
     return dispatch => {
         return axios.get('/news/' + id).then(
             response => {

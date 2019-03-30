@@ -15,8 +15,7 @@ class Comments extends Component {
 
     render() {
         let comment = this.props.comments;
-
-        if (comment.length === 0) {
+        if (comment === []) {
             comment = <h2>Add new comments</h2>;
         } else {
             comment =  <Card key={comment.id} style={{marginBottom: '10px'}}>
