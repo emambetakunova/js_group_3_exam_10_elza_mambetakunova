@@ -7,7 +7,7 @@ CREATE TABLE `news` (
   `title` VARCHAR(255) NOT NULL,
   `content` TEXT NOT NULL,
   `image` VARCHAR(100) NULL,
-  `data` VARCHAR(255) NOT NULL,
+  `data` VARCHAR(255) NULL,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `comments` (
@@ -23,12 +23,12 @@ CREATE TABLE `comments` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);
 
-INSERT INTO `news` (`id`, `title`, `content`, `data`)
+INSERT INTO `news` (`id`, `title`, `content`)
 VALUES
-	(1, 'New news 1', 'Some comment', '2013'),
-    (2, 'New news 2', 'Some comment', '2014'),
-    (3, 'New news 3', 'Some comment', '2015'),
-    (4, 'New news 4', 'Some comment', '2016');
+	(1, 'New news 1', 'Some comment'),
+    (2, 'New news 2', 'Some comment'),
+    (3, 'New news 3', 'Some comment'),
+    (4, 'New news 4', 'Some comment');
 
 INSERT INTO `comments` (`id`, `news_id`, `author`, `comment`)
 VALUES
