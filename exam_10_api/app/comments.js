@@ -18,6 +18,15 @@ const upload = multer({storage});
 const createRouter = connection => {
     const router = express.Router();
 
+    router.get('/', (req, res) => {
+        connection.query('SELECT * FROM `comments`', (error, results) => {
+            if(error) {
+                res.status(500).send({error: 'Database error'})
+            }
+            res.send(results);
+        });
+    });
+
     router.get('/:id', (req, res) => {
         connection.query('SELECT * FROM `comments` WHERE `news_id` = ?', req.params.id, (error, results) => {
             if(error) {
@@ -39,8 +48,8 @@ const createRouter = connection => {
             news.image = req.file.filename;
         }
 
-        connection.query('INSERT INTO `comments` (`title`, `content`, `image`, `data`) VALUES (?, ?, ?, ?)',
-            [comments.title, comments.content, comments.image, comments.data],
+        connection.query('INSERT INTO `comments` (`id`, `news_id`, `author`, `comment`) VALUES (?, ?, ?, ?)',
+            [comments.id, comments.news_id, comments.author, comments.comment],
             (error, results) => {
                 if(error) {
 
@@ -50,6 +59,16 @@ const createRouter = connection => {
             }
         );
     });
+
+    router.delete('/:id', (req, res) => {
+        connection.query('DELETE FROM `comments` WHERE `id` = ?', req.params.id, (error) => {
+            if (error) {
+                res.status(500).send({error: error.sqlMessage});
+            }
+            res.send({message: "Success"});
+        });
+    });
+
     return router;
 };
 

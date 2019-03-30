@@ -58,6 +58,16 @@ const createRouter = connection => {
             }
         );
     });
+
+    router.delete('/:id', (req, res) => {
+        connection.query('DELETE FROM `news` WHERE `id` = ?', req.params.id, (error) => {
+            if (error) {
+                res.status(500).send({error: error.sqlMessage});
+            }
+            res.send({message: "Success"});
+        });
+    });
+
     return router;
 };
 
