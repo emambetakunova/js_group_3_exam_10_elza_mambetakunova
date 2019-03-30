@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {CardBody, Card, CardTitle, CardText} from "reactstrap";
 import {connect} from "react-redux";
-import {fetchComments, fetchDeleteComment} from "../../store/actions/actions";
+import {fetchComments} from "../../store/actions/actions";
 
 import NewsThumbnail from "../../components/NewsThumbnail/NewsThumbnail";
 import Comments from "../../components/Comments/Comments"
@@ -9,12 +9,10 @@ import AddComment from "../../containers/AddComment/AddComment"
 
 class NewsData extends Component {
     componentDidMount() {
-        this.props.onFetchComments();
+        const id = this.props.match.params.id;
+        console.log(id);
+        this.props.onFetchComments(id);
     }
-
-    delete = (id) => {
-        this.props.fetchDeleteComment(id);
-    };
 
     render() {
         let oneNews = this.props.oneNews;
@@ -51,8 +49,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchComments: () => dispatch(fetchComments()),
-        fetchDeleteComment: (id) => dispatch(fetchDeleteComment(id))
+        onFetchComments: (id) => dispatch(fetchComments(id))
     }
 };
 
