@@ -15,7 +15,7 @@ class AddComment extends Component {
     render() {
         return (
             <Fragment>
-                <h2>New comment</h2>
+                <h5><strong>New comment</strong></h5>
                 <AddCommentForm onSubmit={this.createComment}/>
                 <NotificationContainer/>
             </Fragment>
